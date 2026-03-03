@@ -1,0 +1,40 @@
+const fs = require('fs');
+
+const fullDocs = JSON.parse(fs.readFileSync('full_docs_to_patch.json', 'utf8'));
+const payload = JSON.parse(fs.readFileSync('/Users/borui/.gemini/antigravity/brain/5db9b9a0-23a7-4488-abc5-e3f3f9dc73cb/sanity_enrichment_payload.json', 'utf8'));
+
+const mergedDocs = fullDocs.map(doc => {
+    // Find matching payload entry
+    const entry = payload.find(p => p.id === doc._id || `drafts.${p.id}` === doc._id);
+    if (!entry) return doc;
+
+    console.log(`Merging ${doc._id} (${doc.title || doc._type})...`);
+
+    // Deep merge patch into doc
+    const merged = { ...doc };
+
+    if (entry.patch.seo) {
+        merged.seo = { ...merged.seo, ...entry.patch.seo };
+    }
+
+    if (entry.patch.tags) {
+        merged.tags = entry.patch.tags;
+    }
+
+    if (entry.patch.role) {
+        merged.role = entry.patch.role;
+    }
+
+    return merged;
+});
+
+// Output individual JSON files
+if (!fs.existsSync('updates')) fs.mkdirSync('updates');
+
+mergedDocs.forEach((doc, index) => {
+    const filename = `updates/doc-${doc._id}.json`;
+    fs.writeFileSync(filename, JSON.stringify(doc, null, 2));
+    console.log(`Generated ${filename}`);
+});
+
+console.log('Successfully generated individual update files');

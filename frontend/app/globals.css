@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ========================================
+   JUST PEAC HOMES - Organic Modern Theme
+   Warm/Wood Style Color Palette
+   ======================================== */
+
+:root {
+  /* Background Colors */
+  --background-warm: #FAF8F5;
+  /* Warm White / Alabaster */
+  --background-cream: #F5F3EF;
+  /* Soft Cream */
+  --background-white: #FFFFFF;
+  /* Pure White */
+
+  /* Text Colors - High Contrast */
+  --text-primary: #1A1A1A;
+  /* Near Black - Maximum contrast */
+  --text-secondary: #2D3748;
+  /* Dark Gray */
+  --text-muted: #4A5568;
+  /* Medium Gray */
+  --text-olive: #2C3E2D;
+  /* Dark Olive - Better contrast */
+  --text-white: #FFFFFF;
+  /* Pure white for dark backgrounds */
+
+  /* Accent Colors */
+  --accent-clay: #B8653E;
+  /* Rich Clay/Rust */
+  --accent-clay-dark: #9A5528;
+  /* Darker Clay for hover */
+  --accent-taupe: #8B7355;
+  /* Warm Taupe */
+  --accent-wood: #6B5D4F;
+  /* Dark Wood */
+
+  /* Surface Colors */
+  --surface-white: #FFFFFF;
+  --surface-warm: #FFFCF8;
+  --surface-stone: #F0EBE5;
+
+  /* Border Colors */
+  --border-light: #E8E4DF;
+  --border-medium: #D1CCC4;
+  --border-dark: #2D3748;
+
+  /* Navigation Specific */
+  --nav-bg-solid: #FFFFFF;
+  --nav-bg-scrolled: rgba(255, 255, 255, 0.95);
+  --nav-bg-transparent: rgba(255, 255, 255, 0.85);
+  --nav-shadow: rgba(0, 0, 0, 0.1);
+}
+
+@theme inline {
+  /* ========================================
+     UNIFIED DESIGN SYSTEM
+     All colors reference CSS variables that can be
+     overridden by Sanity Design System
+     ======================================== */
+
+  /* Text Colors - Unified naming */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-olive: var(--text-olive);
+  --color-text-white: var(--text-white);
+
+  /* Shorthand aliases for convenience */
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-olive: var(--text-olive);
+  --color-white: var(--text-white);
+
+  /* Background Colors - Unified naming */
+  --color-background-warm: var(--background-warm);
+  --color-background-cream: var(--background-cream);
+  --color-background-white: var(--background-white);
+  --color-bg-warm: var(--background-warm);
+  --color-bg-cream: var(--background-cream);
+  --color-bg-white: var(--background-white);
+
+  /* Surface Colors */
+  --color-surface-white: var(--surface-white);
+  --color-surface-warm: var(--surface-warm);
+  --color-surface-stone: var(--surface-stone);
+
+  /* Accent Colors - Unified naming */
+  --color-accent-clay: var(--accent-clay);
+  --color-accent-clay-dark: var(--accent-clay-dark);
+  --color-accent-taupe: var(--accent-taupe);
+  --color-accent-wood: var(--accent-wood);
+
+  /* Shorthand for primary accent */
+  --color-clay: var(--accent-clay);
+  --color-taupe: var(--accent-taupe);
+
+  /* Border Colors - Unified naming */
+  --color-border-light: var(--border-light);
+  --color-border-medium: var(--border-medium);
+  --color-border-dark: var(--border-dark);
+
+  /* Navigation Colors */
+  --color-nav-bg: var(--nav-bg-solid);
+  --color-nav-bg-scrolled: var(--nav-bg-scrolled);
+  --color-nav-bg-transparent: var(--nav-bg-transparent);
+  --color-nav-shadow: var(--nav-shadow);
+}
+
+/* ========================================
+   Typography: Google Fonts
+   ======================================== */
+
+@theme inline {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+/* ========================================
+   Mobile Optimization
+   ======================================== */
+
+/* Spacer for fixed header */
+.header-spacer {
+  height: 80px;
+  /* Matches nav height */
+}
+
+@media (min-width: 1024px) {
+  .header-spacer {
+    height: 90px;
+    /* Slightly taller on desktop */
+  }
+}
+
+/* ========================================
+   Base Styles
+   ======================================== */
+
+body {
+  background: var(--background-warm);
+  color: var(--text-primary);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   Typography Styles
+   ======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  /* Removed default color - use text-olive class explicitly where needed */
+  /* This allows component-specific colors (like text-white) to work properly */
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2.5rem;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Only apply link colors to text links, not buttons */
+a:not([class*="bg-"]):not([class*="btn"]) {
+  color: var(--accent-clay);
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+a:not([class*="bg-"]):not([class*="btn"]):hover {
+  color: var(--accent-clay-dark);
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+.prose {
+  font-family: 'Manrope', sans-serif;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--text-olive);
+}
+
+.prose strong {
+  color: var(--text-olive);
+  font-weight: 600;
+}
+
+.prose a {
+  color: var(--accent-clay);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose blockquote {
+  border-left-color: var(--accent-clay);
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   Dark Mode Support (Disabled)
+   Note: Dark mode auto-detection disabled to maintain consistent branding
+   ======================================== */
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background-warm: #1A1816;
+    --background-cream: #242220;
+    --text-primary: #F2F2F2;
+    --text-secondary: #C4C4C4;
+    --surface-white: #2A2825;
+    --surface-warm: #1F1D1B;
+    --surface-stone: #353230;
+    --border-light: #3A3833;
+  }
+} */
+
+/* ========================================
+   Custom Animations
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ========================================
+   Wood Texture Overlay (Subtle)
+   ======================================== */
+
+.texture-paper {
+  position: relative;
+}
+
+.texture-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+.texture-wood {
+  position: relative;
+  background-color: var(--surface-warm);
+}
+
+.texture-wood::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/textures/wood-grain-bg.png');
+  background-size: cover;
+  /* High-res texture, cover prevents repeating seams */
+  background-position: center;
+  opacity: 0.15;
+  /* Subtle background */
+  mix-blend-mode: multiply;
+  /* Blends naturally with the warm base */
+  pointer-events: none;
+}
+
+/* ========================================
+   Image Hover Effects (Warm Glow)
+   ======================================== */
+
+.image-hover {
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.image-hover:hover {
+  transform: scale(1.03);
+  filter: brightness(1.05) sepia(0.1);
+}
+
+/* ========================================
+   Button Styles
+   ======================================== */
+
+.btn-primary {
+  background-color: var(--accent-clay);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(182, 110, 65, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-clay-dark);
+  box-shadow: 0 4px 8px rgba(182, 110, 65, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--accent-taupe);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent-wood);
+  transform: translateY(-1px);
+}

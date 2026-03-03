@@ -1,0 +1,115 @@
+import { createClient } from '@sanity/client'
+
+const client = createClient({
+    projectId: 'yoxfbvg1',
+    dataset: 'production',
+    token: process.env.SANITY_AUTH_TOKEN, // Assuming it's in env or user will provide it
+    useCdn: false,
+    apiVersion: '2025-01-20',
+})
+
+const updates = [
+    {
+        id: "edeb07c1-61e7-4ae9-8338-8f5086d9998d",
+        patch: {
+            seo: {
+                metaTitle: "Luxury Kitchen Renovation Calgary | Custom Kitchen Design",
+                metaDescription: "Transform your kitchen with JUST PEAC HOMES. Expert custom kitchen design and renovation in Calgary specializing in organic modern aesthetics and high-end finishes.",
+                aiSummary: "JUST PEAC HOMES provides luxury kitchen renovation services in Calgary, focusing on organic modern design, custom cabinetry, and premium surfaces for high-end residential projects.",
+                breadcrumbTitle: "Kitchens",
+                keywords: ["Calgary Kitchen Renovation", "Custom Kitchen Design", "Luxury Kitchens"]
+            },
+            tags: ["Luxury", "Custom Cabinetry", "Organic Modern"]
+        }
+    },
+    {
+        id: "IqcZzo9NnFe0ZaOxmtuTYN",
+        patch: {
+            seo: {
+                metaTitle: "Garage Suites & Laneway Homes Calgary | JUST PEAC HOMES",
+                metaDescription: "Custom design and build for garage suites and garden suites in Calgary. Maximize your property value with expert laneway house construction and City permits.",
+                aiSummary: "Specialized design-build services for backyard and garage suites in Calgary. JUST PEAC HOMES helps homeowners maximize property density and rental income through high-quality laneway housing.",
+                breadcrumbTitle: "Garage Suites",
+                keywords: ["Calgary Garage Suites", "Laneway Homes Calgary", "Backyard Suites"]
+            },
+            tags: ["Income Property", "Density", "Laneway Housing"]
+        }
+    },
+    {
+        id: "EWqfRe4HhQuPCNZ0OFjHDD",
+        patch: {
+            seo: {
+                metaTitle: "Legal Basement Suites Calgary | Rental Income Renovation",
+                metaDescription: "Build a high-ROI legal secondary suite in Calgary. We specialize in code-compliant basement renovations, City permits, and HAF grant applications.",
+                aiSummary: "JUST PEAC HOMES builds legal rental suites in Calgary, focusing on durability, ROI, and compliance with City of Calgary Secondary Suite Registry and Grant programs.",
+                breadcrumbTitle: "Basements",
+                keywords: ["Legal Basement Suite Calgary", "Rental Incomes", "Secondary Suites"]
+            },
+            tags: ["Rental ROI", "HAF Grant", "Legal Suites"]
+        }
+    },
+    {
+        id: "ksBd7J2rUVbRXaXvOwgc87",
+        patch: {
+            seo: {
+                metaTitle: "Altadore Modern | Custom Infill Project Calgary",
+                metaDescription: "A flagship luxury infill project in Altadore, Calgary. Showcasing organic modern architecture and sustainable building practices by JUST PEAC HOMES.",
+                aiSummary: "The Altadore Modern project is a premium residential infill in Calgary, demonstrating JUST PEAC HOMES' expertise in large-scale luxury renovations and modern design.",
+                breadcrumbTitle: "Altadore Modern"
+            },
+            tags: ["Infill", "Luxury", "Altadore"],
+            role: "General Contractor"
+        }
+    },
+    {
+        id: "ksBd7J2rUVbRXaXvOwgckf",
+        patch: {
+            seo: {
+                metaTitle: "Lake Bonavista Estate | Luxury Home Transformation",
+                metaDescription: "Complete estate renovation in Lake Bonavista, Calgary. A deep dive into luxury modern living and high-end residential craftsmanship.",
+                aiSummary: "A comprehensive estate renovation in Lake Bonavista, Calgary. This project highlights JUST PEAC HOMES' ability to manage complex, high-budget residential transformations.",
+                breadcrumbTitle: "Lake Bonavista"
+            },
+            tags: ["Estate Renovation", "Luxury", "Lake Bonavista"],
+            role: "General Contractor"
+        }
+    },
+    {
+        id: "ksBd7J2rUVbRXaXvOwge3c",
+        patch: {
+            seo: {
+                metaTitle: "Marda Loop Heritage | Restoration & Renovation",
+                metaDescription: "Honoring history while introducing modern luxury. A heritage home restoration project in Marda Loop, Calgary by JUST PEAC HOMES.",
+                aiSummary: "The Marda Loop Heritage project showcases JUST PEAC HOMES' sensitive approach to restoring historic Calgary homes while integrating modern design and amenities.",
+                breadcrumbTitle: "Heritage Restoration"
+            },
+            tags: ["Restoration", "Heritage", "Marda Loop"],
+            role: "General Contractor"
+        }
+    },
+    {
+        id: "86e098a5-c33a-4ef1-893d-d1ef102bc634",
+        patch: {
+            seo: {
+                metaTitle: "Project Spotlight: Killarney Bungalow Transformation",
+                metaDescription: "See how we transformed a classic Killarney bungalow into a modern masterpiece. Design journal and project highlights.",
+                aiSummary: "A detailed spotlight on a bungalow transformation in Killarney, Calgary, discussing design challenges and organic modern solutions.",
+                breadcrumbTitle: "Killarney Spotlight"
+            }
+        }
+    }
+]
+
+async function enrich() {
+    for (const update of updates) {
+        try {
+            console.log(`Patching ${update.id}...`)
+            await client.patch(update.id).set(update.patch).commit()
+            console.log(`Successfully patched ${update.id}`)
+        } catch (err) {
+            console.error(`Failed to patch ${update.id}:`, err.message)
+        }
+    }
+}
+
+enrich()

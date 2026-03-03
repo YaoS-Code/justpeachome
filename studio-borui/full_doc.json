@@ -1,0 +1,77 @@
+{
+  "_createdAt": "2026-01-20T22:24:38Z",
+  "_id": "ae8dd291-d52f-4a80-969a-c7f931e0229c",
+  "_rev": "IqcZzo9NnFe0ZaOxmt0NeB",
+  "_system": {
+    "base": {
+      "id": "ae8dd291-d52f-4a80-969a-c7f931e0229c",
+      "rev": "461BGCEBetjgtL8qVrneVt"
+    }
+  },
+  "_type": "homePage",
+  "_updatedAt": "2026-01-23T17:57:21Z",
+  "featuredProjects": {
+    "subtitle": "Explore our latest Calgary home renovations and custom builds",
+    "title": "Featured Projects"
+  },
+  "hero": {
+    "backgroundImage": {
+      "_type": "image",
+      "alt": "fdsa",
+      "asset": {
+        "_ref": "image-7a2d284217461fc8d1ba56ce91e7c72820f46ee2-2752x1536-png",
+        "_type": "reference"
+      }
+    },
+    "ctaLink": "/contact",
+    "ctaText": "Get Free Consultation",
+    "headline": "Transform Your Calgary Home into Something Extraordinary",
+    "subheadline": "Premier renovation and custom home building specializing in R-CG infill development, heritage restoration, and luxury renovations."
+  },
+  "insightsSection": {
+    "description": "Explore our latest updates, design tips, and renovation guides.",
+    "title": "Latest Insights"
+  },
+  "seo": {
+    "ogImage": {
+      "_type": "image",
+      "asset": {
+        "_ref": "image-7a2d284217461fc8d1ba56ce91e7c72820f46ee2-2752x1536-png",
+        "_type": "reference"
+      }
+    }
+  },
+  "servicesSection": {
+    "description": "Comprehensive design and build services tailored to Calgary's unique character.",
+    "title": "Our Expertise"
+  },
+  "statsSection": {
+    "items": [
+      {
+        "_key": "stat1",
+        "icon": "TrendingUp",
+        "label": "Years Experience",
+        "value": "20+"
+      },
+      {
+        "_key": "stat2",
+        "icon": "CheckCircle",
+        "label": "Projects Completed",
+        "value": "150+"
+      },
+      {
+        "_key": "stat3",
+        "icon": "Award",
+        "label": "Client Rating",
+        "value": "4.9/5"
+      },
+      {
+        "_key": "stat4",
+        "icon": "Users",
+        "label": "Satisfaction Guarantee",
+        "value": "100%"
+      }
+    ]
+  },
+  "title": "Home"
+}
