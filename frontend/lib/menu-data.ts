@@ -63,25 +63,25 @@ export const megamenuData: Record<string, MenuCategory> = {
     items: [
       {
         title: 'Altadore Modern',
-        href: '/projects/altadore-modern',
+        href: '/project/altadore-modern',
         image: '/images/menu/project-altadore.jpg',
         description: 'Complete home transformation',
       },
       {
         title: 'Lake Bonavista Estate',
-        href: '/projects/lake-bonavista-estate',
+        href: '/project/lake-bonavista-estate',
         image: '/images/menu/project-lake-bonavista.jpg',
         description: 'Luxury infill development',
       },
       {
         title: 'Marda Loop Heritage',
-        href: '/projects/marda-loop-heritage',
+        href: '/project/marda-loop-heritage',
         image: '/images/menu/project-marda-loop.jpg',
         description: 'Historic home restoration',
       },
       {
         title: 'Killarney Kitchen',
-        href: '/projects/killarney-kitchen',
+        href: '/project/killarney-kitchen',
         image: '/images/menu/project-killarney.jpg',
         description: 'Modern kitchen redesign',
       },

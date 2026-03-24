@@ -25,7 +25,6 @@ export async function POST(req: NextRequest) {
         switch (body._type) {
             case 'project':
                 revalidatePath('/', 'page')
-                revalidatePath('/projects', 'page')
                 revalidatePath('/portfolio', 'page')
                 if (body.slug?.current) {
                     revalidatePath(`/project/${body.slug.current}`, 'page')

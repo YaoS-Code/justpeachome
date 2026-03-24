@@ -4,6 +4,7 @@ import { PortableText } from '@/components/portable-text'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 60
+export const runtime = 'edge'
 
 interface PageProps {
     params: Promise<{ slug: string }>

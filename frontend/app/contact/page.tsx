@@ -5,6 +5,7 @@ import { getContactPage, getSiteSettings, getProjects } from '@/lib/sanity'
 import ProjectGallery from '@/components/project-gallery'
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'edge';
 
 export async function generateMetadata(): Promise<Metadata> {
     const data = await getContactPage()
@@ -38,7 +39,7 @@ export default async function ContactPage() {
                 "mainEntity": {
                     "@type": "LocalBusiness",
                     "@id": "https://justpeachome.ca/#organization",
-                    "telephone": contact?.phone || "+14035550123",
+                    "telephone": contact?.phone || "+14038508386",
                     "email": contact?.email || "info@justpeachome.ca",
                     "address": {
                         "@type": "PostalAddress",
@@ -106,8 +107,8 @@ export default async function ContactPage() {
                                 </p>
                                 <p>
                                     <strong className="block text-primary text-sm uppercase tracking-wide mb-1">Phone</strong>
-                                    <a href={`tel:${contact?.phone?.replace(/\D/g, '') || '+14035550123'}`} className="hover:text-accent-clay transition-colors">
-                                        {contact?.phone || '(403) 555-0123'}
+                                    <a href={`tel:${contact?.phone?.replace(/\D/g, '') || '+14038508386'}`} className="hover:text-accent-clay transition-colors">
+                                        {contact?.phone || '(403) 850-8386'}
                                     </a>
                                 </p>
                                 <p>

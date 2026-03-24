@@ -381,6 +381,12 @@ export async function getLegalPageBySlug(slug: string): Promise<LegalPageData> {
   return client.fetch(`*[_type == "legalPage" && slug.current == $slug][0]`, { slug })
 }
 
+export async function getLegalPages() {
+  return client.fetch<{ slug: string; _updatedAt: string }[]>(
+    `*[_type == "legalPage"]{ "slug": slug.current, _updatedAt }`
+  )
+}
+
 export async function getAboutPage(): Promise<AboutPageData> {
   const query = `*[_type == "aboutPage"][0]{
     _id,

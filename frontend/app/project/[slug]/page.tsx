@@ -13,6 +13,8 @@ import ProjectTimeline from "@/components/project/project-timeline";
 import ChallengesSolved from "@/components/project/challenges-solved";
 import ClientTestimonial from "@/components/project/client-testimonial";
 
+export const runtime = 'edge';
+
 export const revalidate = 60;
 
 interface PageProps {
@@ -91,8 +93,17 @@ export default async function ProjectPage({ params }: PageProps) {
         },
         "locationCreated": {
           "@type": "Place",
-          "name": "Calgary, AB"
+          "name": project.tags?.[0] ? `${project.tags[0]}, Calgary, AB` : "Calgary, AB",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Calgary",
+            "addressRegion": "AB",
+            "addressCountry": "CA"
+          }
         },
+        ...(project.materialSpecs && project.materialSpecs.length > 0 ? {
+          "material": project.materialSpecs.map((spec: { material: string; brand?: string; reason?: string }) => spec.material).join(', ')
+        } : {}),
         "url": `https://justpeachome.ca/project/${slug}`,
         "keywords": project.tags?.join(', '),
         "about": project.concept ? "Architectural Design & Renovation Concept" : undefined,

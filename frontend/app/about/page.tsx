@@ -63,7 +63,19 @@ export default async function AboutPage() {
                         "item": "https://justpeachome.ca/about"
                     }
                 ]
-            }
+            },
+            ...(data.faqs && data.faqs.length > 0 ? [{
+                "@type": "FAQPage",
+                "@id": "https://justpeachome.ca/about#faq",
+                "mainEntity": data.faqs.map((faq: { question: string; answer: string }) => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faq.answer
+                    }
+                }))
+            }] : [])
         ]
     }
 

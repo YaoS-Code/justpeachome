@@ -16,8 +16,7 @@ import ServicesSection from '@/components/services-section'
 import { getProjects, getHomePage, getPosts, getTestimonials, getSiteSettings, urlForImage } from '@/lib/sanity'
 import type { Project, HomePageData } from '@/lib/sanity'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+export const revalidate = 60
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getHomePage()
   return {
@@ -67,7 +66,7 @@ export default async function Home() {
         },
         "description": homePageData?.seo?.metaDescription || "Calgary's premier renovation and custom home builder specializing in R-CG infill development and luxury homes.",
         "url": "https://justpeachome.ca",
-        "telephone": settings?.contactInfo?.phone || "+14035550123",
+        "telephone": settings?.contactInfo?.phone || "+14038508386",
         "email": settings?.contactInfo?.email || "info@justpeachome.ca",
         "address": {
           "@type": "PostalAddress",
@@ -116,6 +115,18 @@ export default async function Home() {
             "priceCurrency": "CAD",
             "availability": "https://schema.org/InStock"
           }
+        ],
+        "aggregateRating": testimonials.length > 0 ? {
+          "@type": "AggregateRating",
+          "ratingValue": (testimonials.reduce((sum, t) => sum + (t.rating || 5), 0) / testimonials.length).toFixed(1),
+          "reviewCount": testimonials.length,
+          "bestRating": 5,
+          "worstRating": 1
+        } : undefined,
+        "areaServed": [
+          { "@type": "City", "name": "Calgary", "sameAs": "https://en.wikipedia.org/wiki/Calgary" },
+          ...["Altadore","Lake Bonavista","Marda Loop","Killarney","Bridgeland","Inglewood","Mount Royal","Elbow Park"]
+            .map(name => ({ "@type": "Neighborhood", "name": name, "containedInPlace": { "@type": "City", "name": "Calgary" } }))
         ]
       },
       // 3. Breadcrumb Schema

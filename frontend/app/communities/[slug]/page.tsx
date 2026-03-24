@@ -6,6 +6,8 @@ import { getCommunityBySlug, urlForImage, type Community } from '@/lib/sanity'
 import { PortableText } from '@/components/portable-text'
 import SanityImage from '@/components/sanity-image'
 
+export const runtime = 'edge'
+
 interface PageProps {
     params: Promise<{
         slug: string
@@ -58,6 +60,19 @@ export default async function CommunityPage({ params }: PageProps) {
         notFound()
     }
 
+    // Community coordinate mapping for structured data
+    const communityCoordinates: Record<string, { lat: number; lng: number }> = {
+        'altadore': { lat: 51.0308, lng: -114.0894 },
+        'lake-bonavista': { lat: 50.9631, lng: -114.0547 },
+        'marda-loop': { lat: 51.0350, lng: -114.0950 },
+        'killarney': { lat: 51.0400, lng: -114.1100 },
+        'bridgeland': { lat: 51.0550, lng: -114.0440 },
+        'inglewood': { lat: 51.0370, lng: -114.0230 },
+        'mount-royal': { lat: 51.0370, lng: -114.0890 },
+        'elbow-park': { lat: 51.0280, lng: -114.0780 },
+    };
+    const coords = communityCoordinates[slug];
+
     // Structured Data for SEO
     const jsonLd = {
         "@context": "https://schema.org",
@@ -69,6 +84,18 @@ export default async function CommunityPage({ params }: PageProps) {
                 "description": community?.shortDescription || '',
                 "url": `https://justpeachome.ca/communities/${slug}`,
                 "image": community?.coverImage?.asset ? urlForImage(community.coverImage).url() : undefined,
+                ...(coords ? {
+                    "geo": {
+                        "@type": "GeoCoordinates",
+                        "latitude": coords.lat,
+                        "longitude": coords.lng
+                    }
+                } : {}),
+                "containedInPlace": {
+                    "@type": "City",
+                    "name": "Calgary",
+                    "sameAs": "https://en.wikipedia.org/wiki/Calgary"
+                },
                 "additionalProperty": [
                     ...(community?.characteristics?.walkScore ? [{
                         "@type": "PropertyValue",

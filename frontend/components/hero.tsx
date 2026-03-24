@@ -28,7 +28,7 @@ export default function HeroSection({
   },
   secondaryCta = {
     text: "View Our Projects",
-    href: "/projects",
+    href: "/portfolio",
   },
 }: HeroProps) {
   return (

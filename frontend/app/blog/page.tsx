@@ -6,7 +6,8 @@ import CategoryFilter from '@/components/blog/CategoryFilter';
 import BlogGrid from '@/components/blog/BlogGrid';
 import { getPosts, getCategories, getPostsByCategory, getBlogPageSettings } from '@/lib/sanity';
 
-export const revalidate = 86400;
+export const revalidate = 60;
+export const runtime = 'edge';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getBlogPageSettings()
@@ -39,10 +40,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     "@type": "Blog",
     "name": settings?.title || "The Design Journal | JUST PEAC HOMES",
     "description": settings?.description,
-    "url": "https://justpeachomes.com/blog",
+    "url": "https://justpeachome.ca/blog",
     "publisher": {
       "@type": "Organization",
-      "@id": "https://justpeachomes.com/#organization"
+      "@id": "https://justpeachome.ca/#organization"
     }
   };
 

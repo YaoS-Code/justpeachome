@@ -69,8 +69,8 @@ export default function Footer({ settings }: FooterProps) {
                                 </a>
                             </li>
                             <li>
-                                <a href={`tel:${contact?.phone?.replace(/\D/g, '') || '+14035550123'}`} className="hover:text-accent-clay transition-colors">
-                                    {contact?.phone || '(403) 555-0123'}
+                                <a href={`tel:${contact?.phone?.replace(/\D/g, '') || '+14038508386'}`} className="hover:text-accent-clay transition-colors">
+                                    {contact?.phone || '(403) 850-8386'}
                                 </a>
                             </li>
                             <li className="pt-4 flex gap-4">

@@ -1,21 +1,27 @@
 import { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity'
+import { getLegalPages } from '@/lib/sanity'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://justpeachome.ca'
 
     // Fetch dynamic routes from Sanity with _updatedAt
-    const [services, projects, posts, communities] = await Promise.all([
+    const [services, projects, posts, communities, legalPages] = await Promise.all([
         client.fetch<{ slug: string; _updatedAt: string }[]>(`*[_type == "service"]{ "slug": slug.current, _updatedAt }`),
         client.fetch<{ slug: string; _updatedAt: string }[]>(`*[_type == "project"]{ "slug": slug.current, _updatedAt }`),
         client.fetch<{ slug: string; _updatedAt: string }[]>(`*[_type == "post"]{ "slug": slug.current, _updatedAt }`),
-        client.fetch<{ slug: string; _updatedAt: string }[]>(`*[_type == "community"]{ "slug": slug.current, _updatedAt }`)
+        client.fetch<{ slug: string; _updatedAt: string }[]>(`*[_type == "community"]{ "slug": slug.current, _updatedAt }`),
+        getLegalPages()
     ])
+
+    // Use the most recent _updatedAt from all content as the static pages' lastModified
+    const allDates = [...services, ...projects, ...posts, ...communities].map(d => new Date(d._updatedAt).getTime())
+    const staticLastModified = allDates.length > 0 ? new Date(Math.max(...allDates)) : new Date()
 
     // Core static routes
     const staticRoutes = [
         '',
-        '/projects',
+        '/portfolio',
         '/services',
         '/communities',
         '/blog',
@@ -23,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/contact',
     ].map((route) => ({
         url: `${baseUrl}${route}`,
-        lastModified: new Date(),
+        lastModified: staticLastModified,
         changeFrequency: 'monthly' as const,
         priority: route === '' ? 1 : 0.8,
     }))
@@ -56,5 +62,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
     }))
 
-    return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...communityRoutes, ...postRoutes]
+    const legalRoutes = legalPages.map((l) => ({
+        url: `${baseUrl}/${l.slug}`,
+        lastModified: new Date(l._updatedAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.3,
+    }))
+
+    return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...communityRoutes, ...postRoutes, ...legalRoutes]
 }

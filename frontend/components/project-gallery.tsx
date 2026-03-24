@@ -49,7 +49,7 @@ export default function ProjectGallery({
                 {showViewAll && (
                     <div className="text-center mt-16">
                         <Link
-                            href="/projects"
+                            href="/portfolio"
                             className="inline-block px-8 py-4 bg-accent-taupe text-white rounded-lg font-bold transition-all hover:bg-opacity-90 hover:-translate-y-1 shadow-md"
                         >
                             View All Projects

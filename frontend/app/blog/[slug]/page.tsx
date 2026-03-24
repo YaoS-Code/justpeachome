@@ -8,6 +8,8 @@ import { getPostBySlug, getPostsByCategory, urlForImage } from '@/lib/sanity';
 import { components } from '@/components/blog/PortableTextComponents';
 import { Post } from '@/types/sanity';
 
+export const runtime = 'edge';
+
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
@@ -78,7 +80,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         "mainEntityOfPage": {
           "@type": "WebPage",
           "@id": `https://justpeachome.ca/blog/${slug}`
-        }
+        },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["article h1", ".prose"]
+        },
+        "inLanguage": "en-CA"
       },
       {
         "@type": "BreadcrumbList",

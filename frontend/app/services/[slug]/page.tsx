@@ -5,8 +5,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { client, urlForImage, type Service } from '@/lib/sanity'
 import { PortableText } from '@/components/portable-text'
-import Navigation from '@/components/navigation'
-import { getServices } from '@/lib/sanity'
 import ServiceFeatures from '@/components/service-features'
 import ServiceGallery from '@/components/service-gallery'
 import ServiceFAQ from '@/components/service-faq'
@@ -15,6 +13,7 @@ import ServiceProcess from '@/components/service-process'
 import SanityImage from '@/components/sanity-image'
 
 // Enable ISR
+export const runtime = 'edge'
 
 interface PageProps {
     params: Promise<{
@@ -100,11 +99,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ServicePage({ params }: PageProps) {
     const { slug } = await params
 
-    // Parallel fetch: Service data + Menu data
-    const [service, allServices] = await Promise.all([
-        getService(slug),
-        getServices()
-    ])
+    const service = await getService(slug)
 
     if (!service) {
         notFound()
@@ -157,6 +152,7 @@ export default async function ServicePage({ params }: PageProps) {
             // FAQ Schema if FAQs exist
             ...(service.faqs && service.faqs.length > 0 ? [{
                 "@type": "FAQPage",
+                "@id": `https://justpeachome.ca/services/${slug}#faq`,
                 "mainEntity": service.faqs.map(faq => ({
                     "@type": "Question",
                     "name": faq.question,
@@ -164,6 +160,19 @@ export default async function ServicePage({ params }: PageProps) {
                         "@type": "Answer",
                         "text": faq.answer
                     }
+                }))
+            }] : []),
+            // HowTo Schema if process steps exist
+            ...(service.process && service.process.length > 0 ? [{
+                "@type": "HowTo",
+                "@id": `https://justpeachome.ca/services/${slug}#howto`,
+                "name": `How ${service.title} Works`,
+                "description": service.shortDescription || `Step-by-step process for ${service.title} in Calgary.`,
+                "step": service.process.map((step: { title: string; description: string }, index: number) => ({
+                    "@type": "HowToStep",
+                    "position": index + 1,
+                    "name": step.title,
+                    "text": step.description
                 }))
             }] : [])
         ],
@@ -180,7 +189,6 @@ export default async function ServicePage({ params }: PageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <Navigation services={allServices} />
 
             {/* Hero Section */}
             {service.heroStyle === 'split' && service.splitHero ? (
