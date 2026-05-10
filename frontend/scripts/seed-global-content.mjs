@@ -14,7 +14,7 @@ const siteSettings = {
     title: 'JUST PEAC HOMES',
     description: "Just Peac Homes: Capturing the essence of Calgary living through organic modern design. Specializing in R-CG infill developments, heritage restorations, and bespoke luxury homes.",
     contactInfo: {
-        email: 'hello@justpeachomes.com',
+        email: 'hello@justpeachome.ca',
         phone: '(403) 555-0123',
         address: 'Calgary, Alberta\n(By Appointment Only)',
     },

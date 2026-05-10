@@ -2,11 +2,16 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getCommunityBySlug, urlForImage, type Community } from '@/lib/sanity'
+import { client, getCommunityBySlug, urlForImage, type Community } from '@/lib/sanity'
 import { PortableText } from '@/components/portable-text'
 import SanityImage from '@/components/sanity-image'
 
-export const runtime = 'edge'
+export async function generateStaticParams() {
+    const communities = await client.fetch<{ slug: string }[]>(
+        `*[_type == "community"]{ "slug": slug.current }`
+    )
+    return communities.map((community) => ({ slug: community.slug }))
+}
 
 interface PageProps {
     params: Promise<{

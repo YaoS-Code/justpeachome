@@ -12,8 +12,12 @@ import HeroSplit from '@/components/hero-split'
 import ServiceProcess from '@/components/service-process'
 import SanityImage from '@/components/sanity-image'
 
-// Enable ISR
-export const runtime = 'edge'
+export async function generateStaticParams() {
+    const services = await client.fetch<{ slug: string }[]>(
+        `*[_type == "service"]{ "slug": slug.current }`
+    )
+    return services.map((service) => ({ slug: service.slug }))
+}
 
 interface PageProps {
     params: Promise<{

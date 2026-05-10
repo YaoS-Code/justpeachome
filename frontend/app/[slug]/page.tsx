@@ -1,10 +1,16 @@
 import { Metadata } from 'next'
-import { getLegalPageBySlug } from '@/lib/sanity'
+import { client, getLegalPageBySlug } from '@/lib/sanity'
 import { PortableText } from '@/components/portable-text'
 import { notFound } from 'next/navigation'
 
 export const revalidate = 60
-export const runtime = 'edge'
+
+export async function generateStaticParams() {
+    const pages = await client.fetch<{ slug: string }[]>(
+        `*[_type == "legalPage"]{ "slug": slug.current }`
+    )
+    return pages.map((page) => ({ slug: page.slug }))
+}
 
 interface PageProps {
     params: Promise<{ slug: string }>

@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProjectBySlug, urlForImage } from "@/lib/sanity";
+import { client, getProjectBySlug, urlForImage } from "@/lib/sanity";
 import { PortableText } from "@/components/portable-text";
 import SanityImage from "@/components/sanity-image";
 import { ProjectDetail } from "@/types/project";
@@ -13,9 +13,14 @@ import ProjectTimeline from "@/components/project/project-timeline";
 import ChallengesSolved from "@/components/project/challenges-solved";
 import ClientTestimonial from "@/components/project/client-testimonial";
 
-export const runtime = 'edge';
-
 export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const projects = await client.fetch<{ slug: string }[]>(
+    `*[_type == "project"]{ "slug": slug.current }`
+  )
+  return projects.map((project) => ({ slug: project.slug }))
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;

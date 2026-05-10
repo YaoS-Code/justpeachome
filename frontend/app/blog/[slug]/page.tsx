@@ -4,11 +4,16 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { PortableText } from '@portabletext/react';
-import { getPostBySlug, getPostsByCategory, urlForImage } from '@/lib/sanity';
+import { client, getPostBySlug, getPostsByCategory, urlForImage } from '@/lib/sanity';
 import { components } from '@/components/blog/PortableTextComponents';
 import { Post } from '@/types/sanity';
 
-export const runtime = 'edge';
+export async function generateStaticParams() {
+  const posts = await client.fetch<{ slug: string }[]>(
+    `*[_type == "post"]{ "slug": slug.current }`
+  )
+  return posts.map((post) => ({ slug: post.slug }))
+}
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;

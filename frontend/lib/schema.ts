@@ -19,8 +19,8 @@ export function generateWebPageSchema({
     '@type': 'WebPage',
     name: title,
     description,
-    url: `https://justpeachomes.com${url}`,
-    image: image ? `https://justpeachomes.com${image}` : undefined,
+    url: `https://justpeachome.ca${url}`,
+    image: image ? `https://justpeachome.ca${image}` : undefined,
     publisher: organizationSchema(),
     inLanguage: 'en-CA',
   }
@@ -34,7 +34,7 @@ export function generateBreadcrumbSchema(items: Array<{
     '@type': 'ListItem',
     position: index + 1,
     name: item.name,
-    item: `https://justpeachomes.com${item.href}`,
+    item: `https://justpeachome.ca${item.href}`,
   }))
 
   return {
@@ -64,8 +64,8 @@ export function generateBlogPostSchema({
     '@type': 'BlogPosting',
     headline: title,
     description,
-    image: image ? `https://justpeachomes.com${image}` : undefined,
-    url: `https://justpeachomes.com${url}`,
+    image: image ? `https://justpeachome.ca${image}` : undefined,
+    url: `https://justpeachome.ca${url}`,
     datePublished: publishDate,
     dateModified: publishDate,
     author: {
@@ -75,7 +75,7 @@ export function generateBlogPostSchema({
     publisher: organizationSchema(),
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://justpeachomes.com${url}`,
+      '@id': `https://justpeachome.ca${url}`,
     },
     keywords: category ? category.join(', ') : undefined,
   }
@@ -103,8 +103,8 @@ export function generateProjectSchema({
     '@type': 'Project',
     name: title,
     description,
-    image: image ? `https://justpeachomes.com${image}` : undefined,
-    url: `https://justpeachomes.com${url}`,
+    image: image ? `https://justpeachome.ca${image}` : undefined,
+    url: `https://justpeachome.ca${url}`,
     address: address ? {
       '@type': 'PostalAddress',
       addressLocality: 'Calgary',
@@ -134,9 +134,9 @@ export function generateServiceSchema({
     '@type': 'Service',
     name,
     description,
-    url: `https://justpeachomes.com${url}`,
+    url: `https://justpeachome.ca${url}`,
     provider: organizationSchema(),
-    image: image ? `https://justpeachomes.com${image}` : undefined,
+    image: image ? `https://justpeachome.ca${image}` : undefined,
   }
 }
 
@@ -148,8 +148,8 @@ export function organizationSchema(): Organization {
   return {
     '@type': 'Organization',
     name: 'JUST PEAC HOMES',
-    url: 'https://justpeachomes.com',
-    logo: 'https://justpeachomes.com/logo.png',
+    url: 'https://justpeachome.ca',
+    logo: 'https://justpeachome.ca/logo.png',
     description: 'Calgary\'s premier renovation and custom home builder specializing in R-CG infill development, heritage restoration, and luxury renovations.',
     sameAs: [
       'https://www.facebook.com/justpeachomes',
@@ -178,7 +178,7 @@ export function localBusinessSchema(): LocalBusiness {
     '@type': 'LocalBusiness',
     name: 'JUST PEAC HOMES',
     description: 'Premier renovation and custom home builder in Calgary, AB. Specializing in R-CG infill development, heritage restoration, and luxury renovations.',
-    url: 'https://justpeachomes.com',
+    url: 'https://justpeachome.ca',
     telephone: '+1-403-XXX-XXXX',
     address: {
       '@type': 'PostalAddress',

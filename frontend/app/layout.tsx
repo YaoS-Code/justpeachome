@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL('https://justpeachome.ca'),
     alternates: {
-      canonical: './',
+      canonical: '/',
     },
     title: {
       default: settings?.title || "JUST PEAC HOMES | Calgary Renovation & Custom Homes",

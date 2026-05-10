@@ -101,7 +101,7 @@ export default async function ContactPage() {
                             <div className="space-y-4 text-lg text-secondary">
                                 <p>
                                     <strong className="block text-primary text-sm uppercase tracking-wide mb-1">Email</strong>
-                                    <a href={`mailto:${contact?.email || 'info@justpeachomes.com'}`} className="hover:text-accent-clay transition-colors">
+                                    <a href={`mailto:${contact?.email || 'info@justpeachome.ca'}`} className="hover:text-accent-clay transition-colors">
                                         {contact?.email || 'info@justpeachome.ca'}
                                     </a>
                                 </p>

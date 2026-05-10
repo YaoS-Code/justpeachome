@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
         hostname: 'cdn.sanity.io',
       },
     ],
-    unoptimized: true,
+
   },
   typescript: {
     // Skipping type errors during build to work around ETIMEDOUT on next-env.d.ts
